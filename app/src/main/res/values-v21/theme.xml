@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item><!--5.0版本之后导航栏颜色-->
+    </style>
+
+    <style name="AppWindowTranslucentStatusTheme" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">false</item><!--4.4版本之后状态栏不透明-->
+    </style>
+
+    <style name="AppWindowTranslucentBackgroundTheme" parent="AppTheme">
+        <item name="android:windowBackground">@null</item>
+    </style>
+</resources>
