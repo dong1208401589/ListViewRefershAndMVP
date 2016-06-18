@@ -41,25 +41,23 @@ public class MainActivity extends BaseToolbarActivity {
         rv.setAdapter(adapter);
     }
     @Override public boolean onCreateOptionsMenu(Menu menu) {
-        this.getMenuInflater().inflate(R.menu.menu_web_view, menu);
+        this.getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.web_refresh:
+            case R.id.menu_main_about:
                 //this.refreshWebView();
                 return true;
-            case R.id.web_copy:
+            case R.id.menu_main_home_page:
                 //DeviceUtils.copy2Clipboard(this, this.webview.getUrl());
                 //Snackbar.make(this.webview, this.getString(R.string.common_copy_success),
                        // Snackbar.LENGTH_SHORT).show();
                 return true;
-            case R.id.menu_web_share:
+            case R.id.menu_main_top_github:
                 //ShareUtils.share(this, this.getUrl());
                 return true;
-            case R.id.web_switch_screen_mode:
-               // this.switchScreenConfiguration(item);
-                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }

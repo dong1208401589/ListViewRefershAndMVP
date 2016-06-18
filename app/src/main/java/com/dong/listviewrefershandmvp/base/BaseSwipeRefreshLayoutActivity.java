@@ -39,7 +39,6 @@ public abstract class BaseSwipeRefreshLayoutActivity extends BaseToolbarActivity
                 }
             });
         }
-
     }
 
     public abstract void onSwipeRefresh();
