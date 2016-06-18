@@ -2,6 +2,7 @@ package com.dong.listviewrefershandmvp.ui;
 
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -10,17 +11,23 @@ import android.view.MenuItem;
 import com.dong.listviewrefershandmvp.R;
 import com.dong.listviewrefershandmvp.adapter.MainAdapter;
 import com.dong.listviewrefershandmvp.adapter.RecylclerBaseAdapter;
+import com.dong.listviewrefershandmvp.base.BaseDrawerLayoutActivity;
 import com.dong.listviewrefershandmvp.base.BaseToolbarActivity;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseToolbarActivity {
+public class MainActivity extends BaseDrawerLayoutActivity {
 
     @BindView(R.id.main_rv)
     protected RecyclerView rv;
 
     RecylclerBaseAdapter adapter;
 
+
+    @Override
+    public void onSwipeRefresh() {
+
+    }
 
     @Override
     protected int getLayoutId() {
@@ -44,6 +51,13 @@ public class MainActivity extends BaseToolbarActivity {
         this.getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
+
+    @Override
+    public void onMenuItemClick(MenuItem now) {
+
+    }
+
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_main_about:
@@ -61,6 +75,17 @@ public class MainActivity extends BaseToolbarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public int[] getMenuItemIds() {
+        return new int[0];
+    }
+
+    @Override
+    public NavigationView.OnNavigationItemSelectedListener getNavigationItemSelectedListener() {
+        return null;
+    }
+
     @Override
     protected void initListeners() {
 

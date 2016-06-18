@@ -13,7 +13,7 @@
     </style>
 
     <style name="AppWindowTranslucentStatusTheme" parent="AppTheme">
-        <item name="android:windowTranslucentStatus">false</item><!--4.4版本之后状态栏不透明-->
+        <item name="android:windowTranslucentStatus">true</item><!--4.4版本之后状态栏不透明-->
     </style>
 
     <style name="AppWindowTranslucentBackgroundTheme" parent="AppTheme">
