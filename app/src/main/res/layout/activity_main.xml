@@ -27,8 +27,6 @@
             android:id="@+id/main_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#ffff0000"
-            android:dividerHeight="10dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
         </android.support.v4.widget.SwipeRefreshLayout>
 

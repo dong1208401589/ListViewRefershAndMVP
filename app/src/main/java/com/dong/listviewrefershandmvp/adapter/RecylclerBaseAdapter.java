@@ -32,8 +32,12 @@ public class RecylclerBaseAdapter extends RecyclerView.Adapter<RecylclerBaseAdap
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder holder=new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R
-                .layout.recylcler_main_item,null));
+
+        View view=LayoutInflater.from(parent.getContext()).inflate(R
+                .layout.recylcler_main_item,null);
+        view.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        MyViewHolder holder=new MyViewHolder(view);
+
         return holder;
     }
 
