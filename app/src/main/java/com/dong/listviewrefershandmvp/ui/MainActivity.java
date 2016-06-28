@@ -1,6 +1,7 @@
 package com.dong.listviewrefershandmvp.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,10 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dong.listviewrefershandmvp.R;
-import com.dong.listviewrefershandmvp.adapter.MainAdapter;
 import com.dong.listviewrefershandmvp.adapter.RecylclerBaseAdapter;
 import com.dong.listviewrefershandmvp.base.BaseDrawerLayoutActivity;
-import com.dong.listviewrefershandmvp.base.BaseToolbarActivity;
 
 import butterknife.BindView;
 
@@ -62,6 +61,8 @@ public class MainActivity extends BaseDrawerLayoutActivity {
         switch (item.getItemId()) {
             case R.id.menu_main_about:
                 //this.refreshWebView();
+                Intent intent=new Intent(this,TestMoveImageViewActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.menu_main_home_page:
                 //DeviceUtils.copy2Clipboard(this, this.webview.getUrl());

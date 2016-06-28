@@ -36,7 +36,12 @@
             android:layout_height="match_parent"
             android:visibility="visible"
             />-->
-
+        <!--<com.dong.listviewrefershandmvp.ui.views.MoveImageView
+            android:layout_marginTop="100dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_about"
+            />-->
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
@@ -47,5 +52,7 @@
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/menu_navigation"
         />
+
+
 
 </android.support.v4.widget.DrawerLayout>
