@@ -2,7 +2,6 @@ package com.dong.listviewrefershandmvp.presenter.IViews;
 
 import com.dong.listviewrefershandmvp.base.mvp.MvpView;
 import com.dong.listviewrefershandmvp.bean.BaseGankData;
-import com.dong.listviewrefershandmvp.bean.GankData;
 
 import java.util.List;
 
