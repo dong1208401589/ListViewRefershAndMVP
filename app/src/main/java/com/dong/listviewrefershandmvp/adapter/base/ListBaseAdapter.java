@@ -1,4 +1,4 @@
-package com.dong.listviewrefershandmvp.adapter;
+package com.dong.listviewrefershandmvp.adapter.base;
 
 import android.content.Context;
 import android.text.TextUtils;

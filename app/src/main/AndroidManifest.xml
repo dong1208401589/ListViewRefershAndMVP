@@ -13,7 +13,7 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.MainActivity"
+        <activity android:name=".ui.activity.MainActivity"
             android:theme="@style/AppWindowTranslucentStatusTheme"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.TestMoveImageViewActivity"></activity>
+        <activity android:name=".ui.activity.TestMoveImageViewActivity"></activity>
     </application>
 
 </manifest>

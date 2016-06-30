@@ -1,4 +1,4 @@
-package com.dong.listviewrefershandmvp.ui;
+package com.dong.listviewrefershandmvp.ui.activity;
 
 
 import android.content.Intent;
