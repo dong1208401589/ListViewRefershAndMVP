@@ -1,4 +1,4 @@
-package com.dong.listviewrefershandmvp.ui;
+package com.dong.listviewrefershandmvp.ui.activity;
 
 
 import android.content.Intent;
@@ -12,10 +12,15 @@ import android.view.MenuItem;
 import com.dong.listviewrefershandmvp.R;
 import com.dong.listviewrefershandmvp.adapter.RecylclerBaseAdapter;
 import com.dong.listviewrefershandmvp.base.BaseDrawerLayoutActivity;
+import com.dong.listviewrefershandmvp.base.mvp.MvpView;
+import com.dong.listviewrefershandmvp.bean.BaseGankData;
+import com.dong.listviewrefershandmvp.presenter.IViews.MainView;
+
+import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseDrawerLayoutActivity {
+public class MainActivity extends BaseDrawerLayoutActivity implements MainView {
 
     @BindView(R.id.main_rv)
     protected RecyclerView rv;
@@ -89,6 +94,16 @@ public class MainActivity extends BaseDrawerLayoutActivity {
 
     @Override
     protected void initListeners() {
+
+    }
+
+    @Override
+    public void onFailure(Throwable e) {
+
+    }
+
+    @Override
+    public void onGetDataSuccess(List<BaseGankData> data, boolean refresh) {
 
     }
 }
