@@ -10,9 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dong.listviewrefershandmvp.R;
-import com.dong.listviewrefershandmvp.adapter.RecylclerBaseAdapter;
+import com.dong.listviewrefershandmvp.adapter.base.RecyclerBaseAdapter;
 import com.dong.listviewrefershandmvp.base.BaseDrawerLayoutActivity;
-import com.dong.listviewrefershandmvp.base.mvp.MvpView;
 import com.dong.listviewrefershandmvp.bean.BaseGankData;
 import com.dong.listviewrefershandmvp.presenter.IViews.MainView;
 
@@ -25,7 +24,7 @@ public class MainActivity extends BaseDrawerLayoutActivity implements MainView {
     @BindView(R.id.main_rv)
     protected RecyclerView rv;
 
-    RecylclerBaseAdapter adapter;
+    RecyclerBaseAdapter adapter;
 
 
     @Override
@@ -47,7 +46,7 @@ public class MainActivity extends BaseDrawerLayoutActivity implements MainView {
     protected void initData() {
         //this.showBack();
         this.setTitle("呵呵");
-        adapter=new RecylclerBaseAdapter();
+        adapter=new RecyclerBaseAdapter();
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
     }
