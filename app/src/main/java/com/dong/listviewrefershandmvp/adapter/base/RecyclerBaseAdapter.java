@@ -20,13 +20,13 @@ import java.util.List;
  */
 public abstract class RecyclerBaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static final int STATE_EMPTY_ITEM=0;
-    public static final int STATE_LOAD_MORE=1;
-    public static final int STATE_NO_MORE=2;
-    public static final int STATE_NO_DATA=3;
-    public static final int STATE_LESS_ONE_PAGE=4;
-    public static final int STATE_NETWORK_ERROR=5;
-    public static final int STATE_OTHER=6;
+    public static final int STATE_EMPTY_ITEM = 0;
+    public static final int STATE_LOAD_MORE = 1;
+    public static final int STATE_NO_MORE = 2;
+    public static final int STATE_NO_DATA = 3;
+    public static final int STATE_LESS_ONE_PAGE = 4;
+    public static final int STATE_NETWORK_ERROR = 5;
+    public static final int STATE_OTHER = 6;
 
     public static final int LODE_VIEW_TYPE=7;
     public static final int CONTENT_VIEW_TYPE=8;
