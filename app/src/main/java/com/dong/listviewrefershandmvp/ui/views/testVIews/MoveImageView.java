@@ -1,4 +1,4 @@
-package com.dong.listviewrefershandmvp.ui.views;
+package com.dong.listviewrefershandmvp.ui.views.testVIews;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
  * Created by dong1 on 2016/6/27.
  */
 public class MoveImageView extends ImageView {
+
     public MoveImageView(Context context) {
         super(context);
     }
@@ -40,11 +41,17 @@ public class MoveImageView extends ImageView {
                 break;
 
             case MotionEvent.ACTION_MOVE:{
+
+
+                //当前Vview移动X,Y的坐标大小
                 int delataX=x-mLastX;
                 int delataY=y-mLastY;
-                Log.i(TAG,"move,delaX:"+delataX+" delaY:"+delataY);
+                Log.i(TAG,"move,delaX:"+delataX+" delaY:"+delataY+"   "+ x+"  "+y);
+
+                //得到当前View相对父容器的偏移量
                 float translationX= getTranslationX()+delataX;
                 float translationY= getTranslationY()+delataY;
+
                 setTranslationX(translationX);
                 setTranslationY(translationY);
             }

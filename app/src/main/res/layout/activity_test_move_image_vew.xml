@@ -2,9 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <com.dong.listviewrefershandmvp.ui.views.MoveImageView
+    <!--<com.dong.listviewrefershandmvp.ui.views.testVIews.MoveImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@mipmap/ic_about"
-        />
+        />-->
+
+    <com.dong.listviewrefershandmvp.ui.views.testVIews.ScrollerSliding
+        android:id="@+id/ssview"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_about" />
+
 </FrameLayout>
