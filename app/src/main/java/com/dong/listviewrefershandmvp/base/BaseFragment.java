@@ -2,17 +2,15 @@ package com.dong.listviewrefershandmvp.base;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
+import android.view.ViewGroup;
 import android.widget.Toast;
+
 
 import com.dong.listviewrefershandmvp.R;
 import com.dong.listviewrefershandmvp.Utils.DialogHelp;
@@ -21,34 +19,45 @@ import com.dong.listviewrefershandmvp.Utils.ToastUtils;
 import butterknife.ButterKnife;
 
 /**
- * Created by Administrator on 2016/5/27.
+ * Created by Administrator on 2016/4/22.
  */
-public abstract class BaseAppCompatActivity extends AppCompatActivity{
-
+public abstract class BaseFragment extends Fragment {
     private ProgressDialog _waitDialog;
     private boolean _isVisible;
+    public static final int STATE_NONE = 0;
+    public static final int STATE_REFRESH = 1;
+    public static final int STATE_LOADMORE = 2;
+    public static final int STATE_NOMORE = 3;
+    public static final int STATE_PRESSNONE = 4;// 正在下拉但还没有到刷新的状态
+    public static int mState = STATE_NONE;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        inflater.inflate(getLayoutId(),null);
+        return inflater.inflate(getLayoutId(),null);
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(this.getLayoutId());
-        ButterKnife.bind(this);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this,view);
         _isVisible = true;
-        initToolBar(savedInstanceState);
+
         initViews(savedInstanceState);
         initData();
         initListeners();
+
     }
 
     protected abstract int getLayoutId();
-
-    protected abstract void initToolBar(Bundle savedInstanceState);
 
     protected abstract void initViews(Bundle savedInstanceState);
 
     protected abstract void initData();
 
     protected abstract void initListeners();
+
 
 
     public ProgressDialog showWaitDialog() {
@@ -64,8 +73,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity{
     public ProgressDialog showWaitDialog(String message) {
         if (_isVisible) {
             if (_waitDialog == null) {
-                _waitDialog = DialogHelp.getWaitDialog(this, message);
-                _waitDialog.setCanceledOnTouchOutside(false);
+                _waitDialog = DialogHelp.getWaitDialog(getActivity(), message);
             }
             if (_waitDialog != null) {
                 _waitDialog.setMessage(message);
@@ -90,7 +98,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity{
 
     public void dialogShow(String msg) {
         // camera error
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.app_name));
         builder.setMessage(msg);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -107,22 +115,21 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity{
         });
         builder.show();
     }
-
     /*********
      * Toast *
      *********/
 
     public void showToast(String msg) {
-        this.showToast(msg, Toast.LENGTH_LONG);
+        this.showToast(msg, Toast.LENGTH_SHORT);
     }
 
 
     public void showToast(String msg, int duration) {
         if (msg == null) return;
         if (duration == Toast.LENGTH_SHORT || duration == Toast.LENGTH_LONG) {
-            ToastUtils.show(this, msg, duration);
+            ToastUtils.show(getActivity(), msg, duration);
         } else {
-            ToastUtils.show(this, msg, ToastUtils.LENGTH_SHORT);
+            ToastUtils.show(getActivity(), msg, ToastUtils.LENGTH_SHORT);
         }
     }
 
@@ -134,63 +141,13 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity{
 
     public void showToast(int resId, int duration) {
         if (duration == Toast.LENGTH_SHORT || duration == Toast.LENGTH_LONG) {
-            ToastUtils.show(this, resId, duration);
+            ToastUtils.show(getActivity(), resId, duration);
         } else {
-            ToastUtils.show(this, resId, ToastUtils.LENGTH_SHORT);
+            ToastUtils.show(getActivity(), resId, ToastUtils.LENGTH_SHORT);
         }
     }
 
     /*********
      * Toast *
      *********/
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            if (isShouldHideKeyboard(v, ev)) {
-                hideKeyboard(v.getWindowToken());
-            }
-        }
-        return super.dispatchTouchEvent(ev);
-    }
-
-    /**
-     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时则不能隐藏
-     *
-     * @param v
-     * @param event
-     * @return
-     */
-    private boolean isShouldHideKeyboard(View v, MotionEvent event) {
-        if (v != null && (v instanceof EditText)) {
-            int[] l = {0, 0};
-            v.getLocationInWindow(l);
-            int left = l[0],
-                    top = l[1],
-                    bottom = top + v.getHeight(),
-                    right = left + v.getWidth();
-            if (event.getX() > left && event.getX() < right
-                    && event.getY() > top && event.getY() < bottom) {
-                // 点击EditText的事件，忽略它。
-                return false;
-            } else {
-                return true;
-            }
-        }
-        // 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditText上，和用户用轨迹球选择其他的焦点
-        return false;
-    }
-
-    /**
-     * 获取InputMethodManager，隐藏软键盘
-     * @param token
-     */
-    private void hideKeyboard(IBinder token) {
-        if (token != null) {
-            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
-        }
-    }
-
 }

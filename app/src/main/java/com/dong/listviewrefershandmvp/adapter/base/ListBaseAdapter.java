@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+
 import com.dong.listviewrefershandmvp.R;
 import com.dong.listviewrefershandmvp.Utils.TDevice;
 
@@ -58,9 +59,12 @@ public class ListBaseAdapter<T> extends BaseAdapter {
     public ListBaseAdapter(){
         _loadFinishText= R.string.loading_no_more;
         _loadmoreText=R.string.loading;
-        _noDataText=R.string.error_view_no_data;
+        _noDataText= R.string.error_view_no_data;
     }
 
+    public View getFooterView() {
+        return this.mFooterView;
+    }
     @Override
     public int getCount() {
         switch (getState())
@@ -188,7 +192,11 @@ public class ListBaseAdapter<T> extends BaseAdapter {
                         setFooterViewLoading();
                         break;
                     case STATE_NO_MORE:
-                        mFooterView.setVisibility(View.VISIBLE);
+
+                        if (position<20){
+                            mFooterView.setVisibility(View.GONE);
+                        }else  mFooterView.setVisibility(View.VISIBLE);
+
                         progress.setVisibility(View.GONE);
                         text.setText(_loadFinishText);
                         text.setVisibility(View.VISIBLE);

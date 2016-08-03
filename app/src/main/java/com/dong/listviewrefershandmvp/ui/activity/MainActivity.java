@@ -46,7 +46,7 @@ public class MainActivity extends BaseDrawerLayoutActivity implements MainView {
     protected void initData() {
         //this.showBack();
         this.setTitle("呵呵");
-        adapter=new RecyclerBaseAdapter();
+        //adapter=new RecyclerBaseAdapter();
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
     }
@@ -64,17 +64,12 @@ public class MainActivity extends BaseDrawerLayoutActivity implements MainView {
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_main_about:
-                //this.refreshWebView();
                 Intent intent=new Intent(this,TestMoveImageViewActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_main_home_page:
-                //DeviceUtils.copy2Clipboard(this, this.webview.getUrl());
-                //Snackbar.make(this.webview, this.getString(R.string.common_copy_success),
-                       // Snackbar.LENGTH_SHORT).show();
                 return true;
             case R.id.menu_main_top_github:
-                //ShareUtils.share(this, this.getUrl());
                 return true;
 
         }
