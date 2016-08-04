@@ -2,9 +2,22 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
+// 定义一个打包时间
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd_HH_mm_ss", TimeZone.getTimeZone("UCT"))
+}
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
+
+    signingConfigs {
+        myConfig {
+            keyAlias 'chinawidth.keystore'
+            keyPassword 'chinawidth'
+            storeFile file('chinawidth.keystore')
+            storePassword 'chinawidth'
+        }
+    }
 
     defaultConfig {
         applicationId "com.dong.listviewrefershandmvp"
@@ -15,9 +28,57 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true  //即启用混淆器
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'//混淆文件
+            signingConfig signingConfigs.myConfig
+            buildConfigField("boolean","islog","false")
+            // zipAlignEnabled true   //混淆后的zip优化，默认为true，可不写。当不显示配置为true时，不会生成unaligned.apk
+            shrinkResources true //移除无用的资源文件
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        File outputDirectory = new File(outputFile.parent);
+                        def fileName
+                        // 输出apk名称为  mvo_v1.0_2015-06-15_wandoujia.apk
+                        if (variant.buildType.name == "release") {
+                            fileName = "mvp_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                            output.outputFile = new File(outputDirectory, fileName)
+                        } else {
+                            fileName = "mvp_v${defaultConfig.versionName}_${releaseTime()}_debug" +
+                                    ".apk"
+                        }
+                    }
+                }
+            }
         }
+        debug {
+            buildConfigField("boolean","islog","true")
+        }
+    }
+    /*compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }*/
+    productFlavors {
+
+        CeShi_5_13_8080 {
+            //http://192.168.5.13:8080/fyApp/   http://218.108.122.10
+            //http://192.168.2.64:8080/fyApp/
+            //buildConfigField("String", "API_URL", "\"http://192.168.5.13:8080/fyApp/\"")
+            //applicationId "com.chinawidth.gasdistribution.test" //如有必要可以修改包名
+        }
+
+        zheshi_108_122_10_8080 {
+            //http://192.168.5.13:8080/fyApp/
+            //http://192.168.2.64:8080/fyApp/
+            //buildConfigField("String", "API_URL", "\"http://218.108.122.10:8082/fyApp/\"")
+            //applicationId "com.chinawidth.gasdistribution" //如有必要可以修改包名
+        }
+    }
+
+    lintOptions {
+        abortOnError false
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -44,4 +105,9 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.facebook.stetho:stetho:1.3.1'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+    compile 'com.facebook.stetho:stetho-js-rhino:1.3.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.google.zxing:core:3.2.1'
 }

@@ -43,7 +43,6 @@
                 android:lines="2"
                 android:gravity="center"
                 android:text="@string/error_view_loading"
-                android:textColor="@color/color_text"
                 android:textSize="16sp" />
         </LinearLayout>
     </RelativeLayout>

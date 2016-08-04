@@ -1,14 +1,11 @@
 package com.dong.listviewrefershandmvp;
 
-import android.app.Application;
 
-import com.anupcowkur.reservoir.Reservoir;
 import com.dong.listviewrefershandmvp.api.Config;
 import com.dong.listviewrefershandmvp.base.BaseApplication;
+import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.io.IOException;
 
 /**
  * Created by dong1 on 2016/6/18.
@@ -32,19 +29,16 @@ public class AppContext extends BaseApplication{
         super.onCreate();
         ourInstance=this;
         initGson();
-        initReservoir();
+        //facebook 抓包工具
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                        .build());
     }
 
     private void initGson(){
         gson=new GsonBuilder().setDateFormat(Config.GSON_DATA_FORMAT).create();
-    }
-
-    private void initReservoir(){
-        try {
-            Reservoir.init(context(),CACHE_DATA_MAX_SIZE,gson);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }
