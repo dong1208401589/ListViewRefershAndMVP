@@ -94,9 +94,6 @@ public final class CaptureActivity extends BaseToolbarActivity implements
 
     private boolean isHasSurface = false;
 
-    //private RxPermissions rxPermissions;
-
-    CheckBox cb_add_delete;
 
     @Override
     public void onCreate(Bundle icicle) {
