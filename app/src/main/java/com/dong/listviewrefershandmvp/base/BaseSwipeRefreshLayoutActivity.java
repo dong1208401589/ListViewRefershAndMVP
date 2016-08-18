@@ -49,13 +49,13 @@ public abstract class BaseSwipeRefreshLayoutActivity extends BaseToolbarActivity
     public abstract void onSwipeRefresh();
 
 
-    public boolean isRefreshStatus() {
+    /*public boolean isRefreshStatus() {
         return refreshStatus;
     }
 
     public void setRefreshStatus(boolean refreshStatus) {
         this.refreshStatus = refreshStatus;
-    }
+    }*/
 
     @Override
     protected int getLayoutId() {

@@ -158,7 +158,6 @@ public final class CaptureActivity extends BaseToolbarActivity implements
         animation.setInterpolator(new LinearInterpolator());
         animation.setDuration(1500);
         scanLine.startAnimation(animation);
-
     }
 
 

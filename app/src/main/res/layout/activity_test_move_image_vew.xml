@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<com.dong.listviewrefershandmvp.ui.views.RelativeFinishLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/relativeFinishLayout"
+    >
 
     <!--<com.dong.listviewrefershandmvp.ui.views.testVIews.MoveImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@mipmap/ic_about"
         />-->
+<ScrollView
+    android:id="@+id/tv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:text="哈哈哈"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_height="match_parent"/>
+</ScrollView>
 
-    <com.dong.listviewrefershandmvp.ui.views.testVIews.ScrollerSliding
+
+    <!--<com.dong.listviewrefershandmvp.ui.views.testVIews.ScrollerSliding
         android:id="@+id/ssview"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:src="@mipmap/ic_about" />
+        android:src="@mipmap/ic_about" />-->
 
-</FrameLayout>
+</com.dong.listviewrefershandmvp.ui.views.RelativeFinishLayout>
